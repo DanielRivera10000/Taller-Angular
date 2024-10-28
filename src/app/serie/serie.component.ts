@@ -10,14 +10,16 @@ import { SerieService } from './serie.service';
 })
 export class SerieComponent implements OnInit {
 
+  
+  constructor(private serieService: SerieService) { }
   series: Array<Serie> = [];
-  constructor() { }
-  getSerieList(): Array<Serie> {
-    return dataSeries;
-  }
 
+  getSeries() {
+    this.serieService.getSeries().subscribe(series => {
+      this.series = series;
+    });
+  }
   ngOnInit() {
-    this.series = this.getSerieList();
+    this.getSeries();
   }
-
 }
